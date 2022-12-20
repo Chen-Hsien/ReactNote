@@ -106,3 +106,12 @@ useEffect接收兩個參數，第一個是一個函式，定義componentDidMount
 第二個參數是一個array，裡面是定義當哪些變數被改變時，這個useEffect要重新被觸發。   
 實際如下。  
 ```useEffect(() => {...} ,[depenedncies]);```
+
+3. Css 管理
+這邊討論 *CS in JS *, *CSS Modules*.  
+CSS Modules - A CSS Module is a CSS file in which all class names and animation names are scoped locally by default. 
+-> 可以讓你使用模組化的方式來管理樣式表，並使用 JavaScript 導入該模組。每個模組都有自己的namespace，所以你可以在多個模組中使用相同的樣式名稱，而不用擔心命名衝突的問題。  
+優點
+- 確保單個組件（元件）的所有樣式集中在同一個地方.  
+- 確保元件樣式只應用於該組件.  
+- 解決 CSS 全局作用域的問題.  
