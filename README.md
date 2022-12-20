@@ -99,3 +99,10 @@ const Expenses = (props) => {
   );
 };
 ```
+
+2. Effect
+主要功能-> Render UI, React to User Input
+useEffect接收兩個參數，第一個是一個函式，定義componentDidMount或componentDidUpdate要做什麼事，此函式的回傳值也要是一個函式，表示componentWillUnmount 要做什麼事。   
+第二個參數是一個array，裡面是定義當哪些變數被改變時，這個useEffect要重新被觸發。   
+實際如下。  
+```useEffect(() => {...} ,[depenedncies]);```
