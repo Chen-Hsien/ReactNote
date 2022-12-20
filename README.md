@@ -59,6 +59,43 @@ $("#btn").click(function() {
 ```
 
 5. JSX
-是一個允許在JavaScript下撰寫
-5. JSXHtml
+是一個允許在JavaScript下撰寫Html的擴充功能，藉由{}將目標包起來，便可以實現其功能，   
+達到更簡單的建立複雜的UI物件
+```JavaScript
+// const 為常數
+const lists = ['JavaScript', 'Java', 'Node', 'Python'];
 
+class HelloMessage extends React.Compoent {
+  render() {
+    return (
+    <ul>
+      {lists.map((result) => {
+        return (<li>{result}</li>);
+      })}
+    </ul>);
+  }
+}
+```
+### React語法研究
+1. State-狀態  
+React state 是 React 中用來儲存、更新和管理Component的狀態的一個重要概念。   
+在 React 中，Component的狀態是一個 JavaScript 物件，它可以在組件的生命週期中隨時更新。當組件的狀態改變時，React 會自動重新渲染組件，並使用最新的狀態更新 UI。  
+```JavaScript
+//其中的filteredYear即是預設值為2020並利用ExpensesFilter該Component下拉選單，用作對state的更新．  
+const Expenses = (props) => {
+  const [filteredYear, setFilteredYear] = useState('2020');
+
+  const filterChangeHandler = (selectedYear) => {
+    setFilteredYear(selectedYear);
+  };
+
+  return (
+    <div>
+        <ExpensesFilter
+          selected={filteredYear}
+          onChangeFilter={filterChangeHandler}
+        />
+    </div>
+  );
+};
+```
