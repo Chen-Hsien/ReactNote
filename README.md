@@ -57,6 +57,7 @@ $("#btn").click(function() {
     : $(this).text('Add Highlight')
 })
 ```
+(Chapter.13 會講解為何使用classs component)
 
 5. JSX
 是一個允許在JavaScript下撰寫Html的擴充功能，藉由{}將目標包起來，便可以實現其功能，   
@@ -103,9 +104,26 @@ const Expenses = (props) => {
 2. Effect
 主要功能-> Render UI, React to User Input
 useEffect接收兩個參數，第一個是一個函式，定義componentDidMount或componentDidUpdate要做什麼事，此函式的回傳值也要是一個函式，表示componentWillUnmount 要做什麼事。   
-第二個參數是一個array，裡面是定義當哪些變數被改變時，這個useEffect要重新被觸發。   
+第二個參數是一個array，裡面是定義當哪些變數被改變時，這個useEffect要重新被觸發，若為空時則代表只會執行一次。   
+主要可以實作出 componentDidMount(不帶第二個參數)、componentDidUpdate(第二個參數被改變時)、componentWillUnmount(return時做) 三個生命週期函式。
 實際如下。  
-```useEffect(() => {...} ,[depenedncies]);```
+```Javascript
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("test1");
+      setFormIsValid(
+        enteredEmail.includes("@") && enteredPassword.trim().length > 6
+      );
+    }, 500);
+
+    //clean up function
+    return () => {
+      console.log("clean up");
+      clearTimeout(identifier);
+    };
+    //只有在以下2個state變化時才會rerun Effect
+  }, [enteredEmail, enteredPassword]);
+```
 
 3. Css 管理
 這邊討論 *CS in JS *, *CSS Modules*.  
