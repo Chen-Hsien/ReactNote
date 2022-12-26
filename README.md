@@ -137,10 +137,11 @@ CSS Modules - A CSS Module is a CSS file in which all class names and animation 
 4. useReducer
 類似於useState的狀態管理Hook但可以實現更複雜的條件管理。   
 ```const [state, dispatch] = useReducer(reducer, initialState, initStateFn);```.  
-* 第一個參數用來設定變更 state 的規則，特定的 action 時如何更新 state
-* 第二個參數是初始化的 state
-* 第三個參數是初始化 state 的函式，非必要的參數
-* dispatch 用來觸發 action
+* 第一個參數用來設定變更 state 的規則，指定發生特定的 action 時如何更新 state   
+* 第二個參數是初始化當下的 state   
+* 第三個參數是初始化 state 的函式，非必要的參數  
+* dispatch 用來觸發 action  
+推薦用於當State的變化與其他State進行掛勾時，使用Reducer將兩者的變化包再一起進行管理會更方便。   
 
 ```Javascript
 import React, { useReducer } from "react";
@@ -176,3 +177,7 @@ export default function App() {
   );
 }
 ```
+Reducer vs State  
+簡單的場景優先使用State, 較多複合條件則選擇使用Reducer來降低程式碼的複雜度。 
+![image](https://user-images.githubusercontent.com/24216536/209511537-2a79a6cd-4b6d-4fa3-97fd-18026e95b82e.png)  
+
