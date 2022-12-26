@@ -181,3 +181,9 @@ Reducer vs State
 簡單的場景優先使用State, 較多複合條件則選擇使用Reducer來降低程式碼的複雜度。 
 ![image](https://user-images.githubusercontent.com/24216536/209511537-2a79a6cd-4b6d-4fa3-97fd-18026e95b82e.png)  
 
+5. useContext
+當需要使用的State於越來越多層之間傳遞時，就會更難以管理他們，因為很Props僅是需要經過中間件的傳遞進到Component中，造成了很多的傳遞管理困難．   
+就可以利用useContext來進行全域的參數傳遞
+
+6. Hooks使用注意事項
+![image](https://user-images.githubusercontent.com/24216536/209531771-a10e0046-2ad1-4290-97f3-38ddc07572e0.png)
