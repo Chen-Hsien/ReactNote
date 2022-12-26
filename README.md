@@ -126,13 +126,65 @@ return(
 
 
 3. Css 管理
-這邊討論 *CS in JS *, *CSS Modules*.  
+在 React 專案內如果沒有使用 styled component 或者 CSS module 將樣式區隔的話，所有樣式都是 global（意思是所有 component 都會吃到），為了解決這個問題，便出現 styled component / CSS module。  
+
+styled component     
+在 component 內引入 styled component，並切記需要把 styled component 放在 function component 之外（不要放在 function component 內宣告），因為這樣子會造成 component re-render 時重複建立 styled component，這麼做會造成 render 的速度下降。   
+
+Props 的傳遞：
+styled component 會自動接受該 component 上有的 props，透過函式的方式 styled component 可以取得傳入 component 的 props
+```Javascript
+const Button = styled.button`
+  /* Adapt the colors based on primary prop -> 用 arrow function 取得傳入的 props，即可依照需求動態地顯示樣式 */
+  background: ${props => props.primary ? "palevioletred" : "white"};
+  color: ${props => props.primary ? "white" : "palevioletred"};
+
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`;
+
+render(
+  <div>
+    <Button>Normal</Button>
+    /** 傳入 props -> primary */
+    <Button primary>Primary</Button>
+  </div>
+);
+```
 CSS Modules - A CSS Module is a CSS file in which all class names and animation names are scoped locally by default. 
 -> 可以讓你使用模組化的方式來管理樣式表，並使用 JavaScript 導入該模組。每個模組都有自己的namespace，所以你可以在多個模組中使用相同的樣式名稱，而不用擔心命名衝突的問題。  
 優點
 - 確保單個組件（元件）的所有樣式集中在同一個地方.  
 - 確保元件樣式只應用於該組件.  
 - 解決 CSS 全局作用域的問題.  
+
+比較乾淨的作法，因為 style 還是存在於 style sheet 中，不會和 component 擠在同一個 file 內   
+style sheet 的檔名需要修改成 componentName.module.css/scss  
+有別於直接 import './style.css'，需要給 style sheet 一個變數  
+import styles from './componentName.module.css（或者是用 import classes from './componentName.module.css'  
+此時就可以直接用物件取值的方式使用 style class  
+編譯完顯示在 DOM 上會是 ComponentFileName_styleClassName__hash  
+```javascript
+// Component.js
+
+import styles from './componentName.module.css'
+
+// ...
+
+{
+  return (
+    <>
+      // {} -> expression 所以可以用 template literal
+      <MyComponent className={`${styles.title}}`}/>
+      // dot notation 不可以用特別符號，有特別符號的需求就需要用 bracket notation
+      <MyComponent className={`${styles['my-class']}`}/>
+    </>
+  )
+}
+```
 
 4. useReducer
 類似於useState的狀態管理Hook但可以實現更複雜的條件管理。   
