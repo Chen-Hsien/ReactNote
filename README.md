@@ -133,3 +133,46 @@ CSS Modules - A CSS Module is a CSS file in which all class names and animation 
 - 確保單個組件（元件）的所有樣式集中在同一個地方.  
 - 確保元件樣式只應用於該組件.  
 - 解決 CSS 全局作用域的問題.  
+
+4. useReducer
+類似於useState的狀態管理Hook但可以實現更複雜的條件管理。   
+```const [state, dispatch] = useReducer(reducer, initialState, initStateFn);```.  
+* 第一個參數用來設定變更 state 的規則，特定的 action 時如何更新 state
+* 第二個參數是初始化的 state
+* 第三個參數是初始化 state 的函式，非必要的參數
+* dispatch 用來觸發 action
+
+```Javascript
+import React, { useReducer } from "react";
+
+// 初始化 state
+const initialState = { count: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + 1 };
+    case "decrement":
+      return { count: state.count - 1 };
+    case "reset":
+      return { count: (state.count = 0) };
+    default:
+      return { count: state.count };
+  }
+}
+
+export default function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div>
+      Count: {state.count}
+      <br />
+      <br />
+      <button onClick={() => dispatch({ type: "increment" })}>Increment</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>Decrement</button>
+      <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+    </div>
+  );
+}
+```
