@@ -78,7 +78,7 @@ class HelloMessage extends React.Compoent {
 }
 ```
 
-6. DOM(Document Object Model)
+6. DOM(Document Object Model)   
 DOM（文檔對象模型）是一種結構化文檔的模型, 用於將文檔內容表示為一棵樹，其中每個节点都表示文檔中的一個元素或屬性。   
 通過使用 DOM，您可以使用 JavaScript 代碼操作瀏覽器中的網頁元素，例如修改元素的文本、屬性或樣式.  
 
@@ -131,10 +131,10 @@ return(
 <img width="649" alt="image" src="https://user-images.githubusercontent.com/24216536/209051557-0986390a-c9d9-4bdd-942a-cd193295ec1a.png">
 
 
-3. Css 管理
+3. Css 管理 
 在 React 專案內如果沒有使用 styled component 或者 CSS module 將樣式區隔的話，所有樣式都是 global（意思是所有 component 都會吃到），為了解決這個問題，便出現 styled component / CSS module。  
 
-styled component     
+styled component      
 在 component 內引入 styled component，並切記需要把 styled component 放在 function component 之外（不要放在 function component 內宣告），因為這樣子會造成 component re-render 時重複建立 styled component，這麼做會造成 render 的速度下降。   
 
 Props 的傳遞：
@@ -191,8 +191,8 @@ import styles from './componentName.module.css'
   )
 }
 ```
-4. Wrapper Component, React.Fragment
-當很多層div包再一起會使html架構變得難以閱讀(div soup)
+4. Wrapper Component, React.Fragment.  
+當很多層div包再一起會使html架構變得難以閱讀(div soup).  
 ```Javascriipt
 const Wrapper = props => {
  return props.children;
@@ -211,7 +211,7 @@ or
       <p>Paragraph</p>
     </>
 ```
-5. React Portals
+5. React Portals.  
 React portals 是一種特殊的技術，用於將 React 組件渲染到 DOM 結構的任何位置。它們可以用於解決在 React 中無法將元素渲染到某些 DOM 元素中的限制。   
 
 要在 React 中使用 portals，需要使用 ReactDOM.createPortal 函數。該函數接受兩個參數：要渲染的組件和要將其渲染到的 DOM 元素(使用Dom API進行操作Ex. document.getElementById())。   
@@ -220,7 +220,19 @@ React portals 是一種特殊的技術，用於將 React 組件渲染到 DOM 結
  {ReactDom.createPortal(<Backdrop onClick= {props.onConfirm} />,document.getElementById('backdrop-root') )}
 </React.Fragment>
 ```
-6. useReducer
+6. useRef
+reference，在程式中一般是指「變數指向的記憶體位置上對應到的值。 
+useRef是一個函式，跟useState一樣接收一個參數，作為變數初始值。差別是useRef回傳的是一個物件，裡面只有一個屬性current.   
+React會確保useRef回傳出來的這個物件不會因為React元件更新而被重新創造。也就是說在你初始化過後，這個物件會始終指向同一個reference。  
+```Javascript
+const inputRef = useRef();
+ <input type="text" ref={inputRef} />
+```
+常用於.  
+* 以原生方式操作DOM元素.  
+* counter變數.  
+
+8. useReducer.  
 類似於useState的狀態管理Hook但可以實現更複雜的條件管理。   
 ```const [state, dispatch] = useReducer(reducer, initialState, initStateFn);```.  
 * 第一個參數用來設定變更 state 的規則，指定發生特定的 action 時如何更新 state   
@@ -231,7 +243,7 @@ React portals 是一種特殊的技術，用於將 React 組件渲染到 DOM 結
 
 ```Javascript
 import React, { useReducer } from "react";
-
++
 // 初始化 state
 const initialState = { count: 0 };
 
