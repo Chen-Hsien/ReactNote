@@ -77,6 +77,12 @@ class HelloMessage extends React.Compoent {
   }
 }
 ```
+
+6. DOM(Document Object Model)
+DOM（文檔對象模型）是一種結構化文檔的模型, 用於將文檔內容表示為一棵樹，其中每個节点都表示文檔中的一個元素或屬性。   
+通過使用 DOM，您可以使用 JavaScript 代碼操作瀏覽器中的網頁元素，例如修改元素的文本、屬性或樣式.  
+
+React DOM 是一個模組，用於在 React 中操作 DOM。它提供了許多函數，用於在 React 中渲染、修改和刪除 DOM 元素。
 ### React語法研究
 1. State-狀態  
 React state 是 React 中用來儲存、更新和管理Component的狀態的一個重要概念。   
@@ -185,8 +191,36 @@ import styles from './componentName.module.css'
   )
 }
 ```
+4. Wrapper Component, React.Fragment
+當很多層div包再一起會使html架構變得難以閱讀(div soup)
+```Javascriipt
+const Wrapper = props => {
+ return props.children;
+}
+export default Wrapper;
+```  
+除了自己寫一個新的Component也可以使用React.Fragment來代表Empty Wrapper component.  
+```Javasciprt
+    <React.Fragment>
+      <h1>Title</h1>
+      <p>Paragraph</p>
+    </React.Fragment>
+or
+      <>
+      <h1>Title</h1>
+      <p>Paragraph</p>
+    </>
+```
+5. React Portals
+React portals 是一種特殊的技術，用於將 React 組件渲染到 DOM 結構的任何位置。它們可以用於解決在 React 中無法將元素渲染到某些 DOM 元素中的限制。   
 
-4. useReducer
+要在 React 中使用 portals，需要使用 ReactDOM.createPortal 函數。該函數接受兩個參數：要渲染的組件和要將其渲染到的 DOM 元素(使用Dom API進行操作Ex. document.getElementById())。   
+```Javascript
+<React.Fragement>
+ {ReactDom.createPortal(<Backdrop onClick= {props.onConfirm} />,document.getElementById('backdrop-root') )}
+</React.Fragment>
+```
+6. useReducer
 類似於useState的狀態管理Hook但可以實現更複雜的條件管理。   
 ```const [state, dispatch] = useReducer(reducer, initialState, initStateFn);```.  
 * 第一個參數用來設定變更 state 的規則，指定發生特定的 action 時如何更新 state   
