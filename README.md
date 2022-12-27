@@ -82,9 +82,49 @@ class HelloMessage extends React.Compoent {
 DOM（文檔對象模型）是一種結構化文檔的模型, 用於將文檔內容表示為一棵樹，其中每個节点都表示文檔中的一個元素或屬性。   
 通過使用 DOM，您可以使用 JavaScript 代碼操作瀏覽器中的網頁元素，例如修改元素的文本、屬性或樣式.  
 
+7. Controlled components Vs un-controlled components 
+Controlled components 是指，組件的狀態（state）是由父組件控制的。在 controlled components 中，組件的表單輸入值也是由父組件控制的。這意味著，如果要更改組件的值，必須在父組件中更改組件的 state，並使用 props 將新值傳遞到子組件中。   
+
+Un-controlled components 是指，組件的狀態是由自己維護的。在 un-controlled components 中，組件的表單輸入值也是由自己維護的。這意味著，組件可以通過監聽表單輸入事件並使用 DOM API 來更新自己的值 Ex. useRef()。   
+```Javascript
+// Controlled component for email input
+const EmailInput = ({ value, onChange, onBlur }) => {
+  return (
+    <input
+      type="email"
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+      required
+    />
+  );
+};
+// Uncontrolled component for password input
+const PasswordInput = ({ onChange }) => {
+  const inputRef = useRef();
+
+  const handleBlur = () => {
+    if (inputRef.current.value.length < 8) {
+      alert('Password must be at least 8 characters long');
+    }
+  };
+
+  return (
+    <input
+      type="password"
+      ref={inputRef}
+      onChange={onChange}
+      onBlur={handleBlur}
+      required
+    />
+  );
+};
+
+```
+
 React DOM 是一個模組，用於在 React 中操作 DOM。它提供了許多函數，用於在 React 中渲染、修改和刪除 DOM 元素。
 ### React語法研究
-1. State-狀態  
+1. useState-狀態  
 React state 是 React 中用來儲存、更新和管理Component的狀態的一個重要概念。   
 在 React 中，Component的狀態是一個 JavaScript 物件，它可以在組件的生命週期中隨時更新。當組件的狀態改變時，React 會自動重新渲染組件，並使用最新的狀態更新 UI。  
 ```JavaScript
@@ -223,7 +263,8 @@ React portals 是一種特殊的技術，用於將 React 組件渲染到 DOM 結
 6. useRef
 reference，在程式中一般是指「變數指向的記憶體位置上對應到的值。 
 useRef是一個函式，跟useState一樣接收一個參數，作為變數初始值。差別是useRef回傳的是一個物件，裡面只有一個屬性current.   
-React會確保useRef回傳出來的這個物件不會因為React元件更新而被重新創造。也就是說在你初始化過後，這個物件會始終指向同一個reference。  
+React會確保useRef回傳出來的這個物件不會因為React元件更新而被重新創造。也就是說在你初始化過後，這個物件會始終指向同一個reference。 
+並且永遠都可以利用current.value來讀取此ref的值。  
 ```Javascript
 const inputRef = useRef();
  <input type="text" ref={inputRef} />
@@ -232,7 +273,7 @@ const inputRef = useRef();
 * 以原生方式操作DOM元素.  
 * counter變數.  
 
-8. useReducer.  
+7. useReducer.  
 類似於useState的狀態管理Hook但可以實現更複雜的條件管理。   
 ```const [state, dispatch] = useReducer(reducer, initialState, initStateFn);```.  
 * 第一個參數用來設定變更 state 的規則，指定發生特定的 action 時如何更新 state   
@@ -279,9 +320,9 @@ Reducer vs State
 簡單的場景優先使用State, 較多複合條件則選擇使用Reducer來降低程式碼的複雜度。 
 ![image](https://user-images.githubusercontent.com/24216536/209511537-2a79a6cd-4b6d-4fa3-97fd-18026e95b82e.png)  
 
-5. useContext
+8. useContext
 當需要使用的State於越來越多層之間傳遞時，就會更難以管理他們，因為很Props僅是需要經過中間件的傳遞進到Component中，造成了很多的傳遞管理困難．   
 就可以利用useContext來進行全域的參數傳遞
 
-6. Hooks使用注意事項
+9. Hooks使用注意事項
 ![image](https://user-images.githubusercontent.com/24216536/209531771-a10e0046-2ad1-4290-97f3-38ddc07572e0.png)
