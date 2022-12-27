@@ -99,26 +99,6 @@ const EmailInput = ({ value, onChange, onBlur }) => {
     />
   );
 };
-// Uncontrolled component for password input
-const PasswordInput = ({ onChange }) => {
-  const inputRef = useRef();
-
-  const handleBlur = () => {
-    if (inputRef.current.value.length < 8) {
-      alert('Password must be at least 8 characters long');
-    }
-  };
-
-  return (
-    <input
-      type="password"
-      ref={inputRef}
-      onChange={onChange}
-      onBlur={handleBlur}
-      required
-    />
-  );
-};
 
 ```
 
@@ -147,7 +127,7 @@ const Expenses = (props) => {
 };
 ```
 
-2. Effect
+2. useEffect  
 主要功能-> Render UI, React to User Input
 useEffect接收兩個參數，第一個是一個函式，定義componentDidMount或componentDidUpdate要做什麼事，此函式的回傳值也要是一個函式，表示componentWillUnmount 要做什麼事。   
 第二個參數是一個array，裡面是定義當哪些變數被改變時，這個useEffect要重新被觸發，若為空時則代表只會執行一次。   
@@ -260,8 +240,8 @@ React portals 是一種特殊的技術，用於將 React 組件渲染到 DOM 結
  {ReactDom.createPortal(<Backdrop onClick= {props.onConfirm} />,document.getElementById('backdrop-root') )}
 </React.Fragment>
 ```
-6. useRef
-reference，在程式中一般是指「變數指向的記憶體位置上對應到的值。 
+6. useRef.  
+reference，在程式中一般是指"變數指向的記憶體位置上對應到的值"。 
 useRef是一個函式，跟useState一樣接收一個參數，作為變數初始值。差別是useRef回傳的是一個物件，裡面只有一個屬性current.   
 React會確保useRef回傳出來的這個物件不會因為React元件更新而被重新創造。也就是說在你初始化過後，這個物件會始終指向同一個reference。 
 並且永遠都可以利用current.value來讀取此ref的值。  
@@ -320,9 +300,9 @@ Reducer vs State
 簡單的場景優先使用State, 較多複合條件則選擇使用Reducer來降低程式碼的複雜度。 
 ![image](https://user-images.githubusercontent.com/24216536/209511537-2a79a6cd-4b6d-4fa3-97fd-18026e95b82e.png)  
 
-8. useContext
+8. useContext.  
 當需要使用的State於越來越多層之間傳遞時，就會更難以管理他們，因為很Props僅是需要經過中間件的傳遞進到Component中，造成了很多的傳遞管理困難．   
-就可以利用useContext來進行全域的參數傳遞
+就可以利用useContext來進行全域的參數傳遞.  
 
-9. Hooks使用注意事項
-![image](https://user-images.githubusercontent.com/24216536/209531771-a10e0046-2ad1-4290-97f3-38ddc07572e0.png)
+9. Hooks使用注意事項.  
+![image](https://user-images.githubusercontent.com/24216536/209531771-a10e0046-2ad1-4290-97f3-38ddc07572e0.png).  
