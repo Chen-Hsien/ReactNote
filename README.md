@@ -82,7 +82,7 @@ class HelloMessage extends React.Compoent {
 DOM（文檔對象模型）是一種結構化文檔的模型, 用於將文檔內容表示為一棵樹，其中每個节点都表示文檔中的一個元素或屬性。   
 通過使用 DOM，您可以使用 JavaScript 代碼操作瀏覽器中的網頁元素，例如修改元素的文本、屬性或樣式.  
 
-7. Controlled components Vs un-controlled components 
+7. Controlled components Vs un-controlled components  
 Controlled components 是指，組件的狀態（state）是由父組件控制的。在 controlled components 中，組件的表單輸入值也是由父組件控制的。這意味著，如果要更改組件的值，必須在父組件中更改組件的 state，並使用 props 將新值傳遞到子組件中。   
 
 Un-controlled components 是指，組件的狀態是由自己維護的。在 un-controlled components 中，組件的表單輸入值也是由自己維護的。這意味著，組件可以通過監聽表單輸入事件並使用 DOM API 來更新自己的值 Ex. useRef()。   
