@@ -311,3 +311,33 @@ Reducer vs State
 先前有提到若是有focus 在 input 元素之類的需求，可以透過 useRef 的方式達成。  
 但如果今天這個 input 元素是額外再封裝成一個 component 的話，而父 component 也想要對於這個被額外封裝成 component 的 input 元素可以執行像是 focus 的需求的話，那這時候就還需要用到 useImperativeHandle 這個 Hook.   
 並透過forwardRef 用來建立一個新的 React component 並將 ref 屬性轉交到底下的另外一個component。
+```Javascript
+const CustomTextInput = React.forwardRef((props, ref) => {
+  const inputRef = useRef(null);
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current.focus();
+    },
+    getValue: () => inputRef.current.value
+  }));
+
+  return <input ref={inputRef} />;
+});
+
+const ParentComponent = () => {
+  const inputRef = useRef(null);
+
+  const handleClick = () => {
+    inputRef.current.focus();
+    console.log(inputRef.current.getValue());
+  };
+
+  return (
+    <div>
+      <CustomTextInput ref={inputRef} />
+      <button onClick={handleClick}>Focus and log value</button>
+    </div>
+  );
+};
+```
