@@ -306,3 +306,8 @@ Reducer vs State
 
 9. Hooks使用注意事項.  
 ![image](https://user-images.githubusercontent.com/24216536/209531771-a10e0046-2ad1-4290-97f3-38ddc07572e0.png).  
+
+10. useImperativeHandle.  
+先前有提到若是有focus 在 input 元素之類的需求，可以透過 useRef 的方式達成。  
+但如果今天這個 input 元素是額外再封裝成一個 component 的話，而父 component 也想要對於這個被額外封裝成 component 的 input 元素可以執行像是 focus 的需求的話，那這時候就還需要用到 useImperativeHandle 這個 Hook.   
+並透過forwardRef 用來建立一個新的 React component 並將 ref 屬性轉交到底下的另外一個component。
