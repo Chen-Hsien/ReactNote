@@ -341,3 +341,8 @@ const ParentComponent = () => {
   );
 };
 ```
+10. IMG Import
+```javascript
+import mealsImage from '../../assets/meals.jpg
+<img src={mealsImage}></img>
+```
