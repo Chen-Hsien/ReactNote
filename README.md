@@ -100,7 +100,32 @@ const EmailInput = ({ value, onChange, onBlur }) => {
   );
 };
 
-```
+8. Function Closure
+如果錯誤的使用全域變數，程式很容易會出現一些莫名其妙的 bug ，這時候我們就可以利用閉包（closure）的作法，讓函式有自己私有變數.  
+
+下面會出現一個問題，當第一次點擊Allow Toggling的按鈕，可以正確印出log，但接下來就失去作用，其原因就是按下按鈕後regenerate app function但```toogleParagraphHandler```因useCallback的原因沒有重新產生，因此內部的allowToggle與state新產生的allowToggle兩者便有落差．   
+```Javascript
+function App() {
+  const [showParagraph, setShowParagraph] = useState(false);
+  const [allowToggle, setAllowToggle] = useState(false);
+
+  console.log("APP RUNNING");
+
+  const toogleParagraphHandler = useCallback(() => {
+    if (allowToggle) {
+      setShowParagraph((prevShowParagraph) => !prevShowParagraph);
+    }
+  }, []);
+
+  const allowToggleHandler = () => {
+    setAllowToggle(true);
+  };
+  
+      <Button onClick={allowToggleHandler}>Allow Toggling</Button>
+      <Button onClick={toogleParagraphHandler}>toggle Paragraph</Button>
+  ```
+  
+  
 ### React運作原理
 ![image](https://user-images.githubusercontent.com/24216536/210242719-fbbf2ad9-7de4-4589-bdad-393a871ab340.png)。  
 React-> 一套Javascript Library, 允許使用者建立前端介面，並且透過ReactDOM與WEB實際進行互動。  
@@ -411,8 +436,8 @@ import mealsImage from '../../assets/meals.jpg
 
 12. useCallback
 ![image](https://user-images.githubusercontent.com/24216536/210258289-4957ac95-dfa1-4c15-835f-78f933074c7d.png)。  
-```useCallback```的功能就類似將obj2 指向obj1 的這個動作，藉此比較function內容是否有變化，也因此可以不會每次都被重新渲染。 
-useCallback(), 需傳入兩個參數
+```useCallback```的功能就類似將obj2 指向obj1 的這個動作，藉此比較function內容是否有變化，也因此可以不會每次都被重新渲染。  
+useCallback(), 需傳入兩個參數第一個參數為當首次渲染時要執行什麼動作，第二個[]內容則同useEffect一樣，當內容改變時會再次觸發動作。  
 
 
 
