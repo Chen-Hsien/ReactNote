@@ -131,8 +131,34 @@ function App() {
 ![image](https://user-images.githubusercontent.com/24216536/210246719-0708bdfc-b3cf-4826-b9c5-2a4eccd62a10.png)。 
 ![image](https://user-images.githubusercontent.com/24216536/210246734-c3ad08e6-b39e-4f14-9ebc-2fa8ef979eac.png)。   
 
-Component Re-Evalusting exampleComponent Re-Evalusting exampleComponent Re-Evalusting exampleComponent Re-Evalusting exampleComponent Re-Evalusting examplefaowejifoaweffdsfdsfComponent Re-Evalusting example* 
+* Parent Component Re-Evalusting Child component also be Re-Evalusated
+如下範例，儘管show={false}, 當點擊按鈕時狀態不會改變，但因為parent Component改變了，所以child component也會進行改變．   
+```Javascript
+  //app.js
+  return (
+    <div className="app">
+      <h1>Hi there!</h1>
+      <DemoOutput show={false} /> {/* this is the component that is re-rendered */}
+      <Button onClick={toogleParagraphHandler}>toggle Paragraph</Button>
+    </div>
+  );
+  //DemoOutput
+  const DemoOutput = (props) => {
+    console.log('DemoOutput RUNNING');
+  return <p>{props.show ? 'This is new!' : ''}</p>;
+}
+```
+![image](https://user-images.githubusercontent.com/24216536/210248721-2e1daa34-22cb-4d1c-a7db-16cc8c68cb78.png)   
+---
+避免上述不必要的Re-Evalusting，使用```export default React.memo(DemoOutput);```可以檢查當prop有改變時，才會重跑一次(僅限於Functional Programming).  
 
+但當套用在```export default React.memo(Button);```時，卻仍會印出Button Running的狀況。  
+這是因為當function app 重新跑一遍時，會另外製造一個```const toogleParagraphHandler```，儘管看起來功能名稱相同，但對JS是不同的存在．
+類似如下的比較，primitive value(data that is not an object and has no methods or properties)才會對React.memo有用   
+![image](https://user-images.githubusercontent.com/24216536/210253668-df2b5f1d-ff3e-4fce-b85e-0ee45935382f.png)    
+
+
+  
 
 React DOM 是一個模組，用於在 React 中操作 DOM。它提供了許多函數，用於在 React 中渲染、修改和刪除 DOM 元素。
 ### React語法研究
@@ -382,3 +408,14 @@ import mealsImage from '../../assets/meals.jpg
 11. 傳入input var
 利用...props.input可以將類似type:'text'這樣子的參數自動帶入input tag內
 ```<input {...props.input}/>```
+
+12. useCallback
+![image](https://user-images.githubusercontent.com/24216536/210258289-4957ac95-dfa1-4c15-835f-78f933074c7d.png)。  
+```useCallback```的功能就類似將obj2 指向obj1 的這個動作，藉此比較function內容是否有變化，也因此可以不會每次都被重新渲染。 
+useCallback(), 需傳入兩個參數
+
+
+
+
+
+
