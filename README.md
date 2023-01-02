@@ -101,6 +101,11 @@ const EmailInput = ({ value, onChange, onBlur }) => {
 };
 
 ```
+### React運作原理
+![image](https://user-images.githubusercontent.com/24216536/210242719-fbbf2ad9-7de4-4589-bdad-393a871ab340.png)。  
+React-> 一套Javascript Library, 允許使用者建立前端介面，並且透過ReactDOM與WEB實際進行互動。  
+React背後的運作總是圍繞著Components進行．Props(parent傳入資料), Context(Component內定義的數據), State(Component內的可變量數據)，並透過Real DOM渲染出使用者看到的畫面．
+且當Compoenets改變時
 
 React DOM 是一個模組，用於在 React 中操作 DOM。它提供了許多函數，用於在 React 中渲染、修改和刪除 DOM 元素。
 ### React語法研究
