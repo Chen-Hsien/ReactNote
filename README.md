@@ -346,3 +346,7 @@ const ParentComponent = () => {
 import mealsImage from '../../assets/meals.jpg
 <img src={mealsImage}></img>
 ```
+
+11. 傳入input var
+利用...props.input可以將類似type:'text'這樣子的參數自動帶入input tag內
+```<input {...props.input}/>```
