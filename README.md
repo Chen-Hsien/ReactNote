@@ -125,6 +125,42 @@ function App() {
       <Button onClick={toogleParagraphHandler}>toggle Paragraph</Button>
   ```
   
+  9. Functional Components vs Class-based Components
+  #### what is Functional Components
+![image](https://user-images.githubusercontent.com/24216536/210292419-bcbc5209-1b8a-4ab4-bada-90ad76193cb8.png)
+兩者現在在React都有支援，React16.8前只有Class-based, 且**React-Hook只支援Functional Components**.   
+Functional Components優點.  
+1. 簡單理解，輸入為parent props, 輸出為UI畫面
+2. 易於測試，將Components依功能拆分更好進行單元測試
+3. 性能較佳，不需同Class-based每次都需要new Instance
+Functional Components缺點.  
+1. 沒有state, 需額外引入
+2. 沒有Life cycle，無法指定載入Components的各階端需要執行什麼
+
+項目 | Functional | Class-based
+---- | ---------- | -------- 
+編譯快 | 勝 (少了繼承 class 轉成 ES5)	 | 
+更少程式碼 | 勝 (沒有繼承)	 | 
+測試容易 | 勝 (元件週期單純)	 | 
+this 的影響 | 勝 (閉包會抓住值) | this.props (state) 會改變
+複雜狀態操作 |  | 勝 (有 batch，可同時設多個狀態，自動合併狀態物件)
+複雜的情境 | 架構上就要切割乾淨 | 勝 (較多元件週期可以操作) 
+    
+```Javascript
+// Class-based
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+
+// Functional
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+```
+
+  
   
 ### React運作原理
 ![image](https://user-images.githubusercontent.com/24216536/210242719-fbbf2ad9-7de4-4589-bdad-393a871ab340.png)。  
