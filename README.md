@@ -440,8 +440,52 @@ import mealsImage from '../../assets/meals.jpg
 useCallback(), 需傳入兩個參數第一個參數為當首次渲染時要執行什麼動作，第二個[]內容則同useEffect一樣，當內容改變時會再次觸發動作。  
 
 13. useMemo
+類似useCallback, 同樣為設定re-rendering的條件，但useMemo是用來比較數值前後是否有差異，而非Function.   
+舉例
+```Javascript
+//以下每次點擊Button都會印出Log, 原因為儘管listItems內容皆為相同，但每次都是重新創造一個array，故在比對上認為兩者是不同的array.  
+  const changeTitleHandler = useCallback(() => {
+    setListTitle('New Title');
+  }, []);
+  
+      <DemoList title={listTitle} items={[5, 3, 1, 10, 9]} />
+      <Button onClick={changeTitleHandler}>Change List Title</Button>
+ ---------------------------------------------------------     
+    const sortedList = useMemo(() => {
+    console.log('Items sorted');
+    return items.sort((a, b) => a - b);
+  }, [items]); 
+  console.log('DemoList RUNNING');
+  
+  return    <ul>
+        {sortedList.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+```
+```Javascript
+//以下則因將array利用useMemo包起來，所以只有當useMemo內的array數值真的有變化才會重印Log出來
+  const changeTitleHandler = useCallback(() => {
+    setListTitle('New Title');
+  }, []);
 
-
+  const listItems = useMemo(() => [5, 3, 1, 10, 9], []);
+  
+      <DemoList title={listTitle} items={listItems} />
+      <Button onClick={changeTitleHandler}>Change List Title</Button>
+ ---------------------------------------------------------     
+    const sortedList = useMemo(() => {
+    console.log('Items sorted');
+    return items.sort((a, b) => a - b);
+  }, [items]); 
+  console.log('DemoList RUNNING');
+  
+  return    <ul>
+        {sortedList.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+```
 
 
 
