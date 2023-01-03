@@ -439,6 +439,8 @@ import mealsImage from '../../assets/meals.jpg
 ```useCallback```的功能就類似將obj2 指向obj1 的這個動作，藉此比較function內容是否有變化，也因此可以不會每次都被重新渲染。  
 useCallback(), 需傳入兩個參數第一個參數為當首次渲染時要執行什麼動作，第二個[]內容則同useEffect一樣，當內容改變時會再次觸發動作。  
 
+13. useMemo
+
 
 
 
