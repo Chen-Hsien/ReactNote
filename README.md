@@ -99,7 +99,7 @@ const EmailInput = ({ value, onChange, onBlur }) => {
     />
   );
 };
-
+```
 8. Function Closure
 如果錯誤的使用全域變數，程式很容易會出現一些莫名其妙的 bug ，這時候我們就可以利用閉包（closure）的作法，讓函式有自己私有變數.  
 
@@ -147,7 +147,8 @@ this 的影響 | 勝 (閉包會抓住值) | this.props (state) 會改變
 複雜的情境 | 架構上就要切割乾淨 | 勝 (較多元件週期可以操作) 
     
 ```Javascript
-// Class-based
+// Class-based, 利用extends 和 render() 的寫法來達到return 的效果
+// 並且需要繼承Component才可以使用props等相關功能
 class Welcome extends React.Component {
   render() {
     return <h1>Hello, {this.props.name}</h1>;
@@ -159,7 +160,11 @@ function Welcome(props) {
   return <h1>Hello, {props.name}</h1>;
 }
 ```
-
+Class-based 生命週期
+![image](https://user-images.githubusercontent.com/24216536/210296271-e630619d-4925-4047-8abc-cd9fd8dbba25.png)
+componentDidMount 是 React 中的一個生命週期方法。它會在組件第一次渲染完成後立即執行。  
+componentDidUpdate 是 React 中的一個生命週期方法。它會在組件每次更新後立即執行。  
+componentWillUnmount 是 React 中的一個生命週期方法。它會在組件卸載前立即執行。  
   
   
 ### React運作原理
