@@ -527,14 +527,61 @@ useCallback(), 需傳入兩個參數第一個參數為當首次渲染時要執�
         ))}
       </ul>
 ```
+14. Http Request
+* get
+fetch 會使用 ES6 的 Promise 作回應.  
+then 作為下一步.  
+catch 作為錯誤回應 (404, 500…).  
+```Javascript
+ const fetchMoviesHandler = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await fetch('https://react-http-6b4a6.firebaseio.com/movies.json');
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
 
-14. Custom Hooks
+      const data = await response.json();
+
+      const loadedMovies = [];
+
+      for (const key in data) {
+        loadedMovies.push({
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate,
+        });
+      }
+
+      setMovies(loadedMovies);
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsLoading(false);
+  }, []);
+```
+* post
+ async function addMovieHandler(movie) {
+    const response = await fetch('https://react-http-6b4a6.firebaseio.com/movies.json', {
+      method: 'POST',
+      body: JSON.stringify(movie),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await response.json();
+    console.log(data);
+  }
+15. 
+16. Custom Hooks
 Outsource stateful logic into re-usable functions.  
 ucstom hooks can use other React hooks and React state.  
 以usexxxx作為function name.  
 自定義的 Hook 有一個機制重複使用 stateful 邏輯（例如設定訂閱並記住目前的值），但每次你使用自定義的 Hook 時，所有內部的 state 和 effect 都是完全獨立的。  
  
-15. From Control
+17. From Control
 * when form is submitted.  
 * when a input is losing focus(blur).  
 * on every keystroke.  
