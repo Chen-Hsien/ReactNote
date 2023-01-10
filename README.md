@@ -535,5 +535,8 @@ ucstom hooks can use other React hooks and React state.
 自定義的 Hook 有一個機制重複使用 stateful 邏輯（例如設定訂閱並記住目前的值），但每次你使用自定義的 Hook 時，所有內部的 state 和 effect 都是完全獨立的。  
  
 15. From Control
+* when form is submitted.  
+* when a input is losing focus(blur).  
+* on every keystroke.  
 
 
