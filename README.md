@@ -127,7 +127,6 @@ function App() {
   
   9. Functional Components vs Class-based Components
   #### what is Functional Components
-![image](https://user-images.githubusercontent.com/24216536/210292419-bcbc5209-1b8a-4ab4-bada-90ad76193cb8.png)
 兩者現在在React都有支援，React16.8前只有Class-based, 且**React-Hook只支援Functional Components**.   
 Functional Components優點.  
 1. 簡單理解，輸入為parent props, 輸出為UI畫面
@@ -161,17 +160,14 @@ function Welcome(props) {
 }
 ```
 Class-based 生命週期
-![image](https://user-images.githubusercontent.com/24216536/210296271-e630619d-4925-4047-8abc-cd9fd8dbba25.png)
 componentDidMount 是 React 中的一個生命週期方法。它會在組件第一次渲染完成後立即執行。  
 componentDidUpdate 是 React 中的一個生命週期方法。它會在組件每次更新後立即執行。  
 componentWillUnmount 是 React 中的一個生命週期方法。它會在組件卸載前立即執行。  
   
   
 ### React運作原理
-![image](https://user-images.githubusercontent.com/24216536/210242719-fbbf2ad9-7de4-4589-bdad-393a871ab340.png)。  
 React-> 一套Javascript Library, 允許使用者建立前端介面，並且透過ReactDOM與WEB實際進行互動。  
-React背後的運作總是圍繞著Components進行．Props(parent傳入資料), Context(Component內定義的數據), State(Component內的可變量數據)，並透過Real DOM渲染出使用者看到的畫面．
-![image](https://user-images.githubusercontent.com/24216536/210243971-19cad863-4588-4426-b5fb-fea1ffc87cd6.png)   
+React背後的運作總是圍繞著Components進行．Props(parent傳入資料), Context(Component內定義的數據), State(Component內的可變量數據)，並透過Real DOM渲染出使用者看到的畫面． 
 且當Compoenets改變時React會Re-Evaluating, 而不會Re-Rendering Real DOM，此特性會讓效能提升，不需要一直重新渲染畫面．   
 
 * Component Re-Evalusting example
@@ -194,8 +190,6 @@ function App() {
   );
 }
 ```
-![image](https://user-images.githubusercontent.com/24216536/210246719-0708bdfc-b3cf-4826-b9c5-2a4eccd62a10.png)。 
-![image](https://user-images.githubusercontent.com/24216536/210246734-c3ad08e6-b39e-4f14-9ebc-2fa8ef979eac.png)。   
 
 * Parent Component Re-Evalusting Child component also be Re-Evalusated
 如下範例，儘管show={false}, 當點擊按鈕時狀態不會改變，但因為parent Component改變了，所以child component也會進行改變．   
@@ -214,14 +208,12 @@ function App() {
   return <p>{props.show ? 'This is new!' : ''}</p>;
 }
 ```
-![image](https://user-images.githubusercontent.com/24216536/210248721-2e1daa34-22cb-4d1c-a7db-16cc8c68cb78.png)   
 ---
 避免上述不必要的Re-Evalusting，使用```export default React.memo(DemoOutput);```可以檢查當prop有改變時，才會重跑一次(僅限於Functional Programming).  
 
 但當套用在```export default React.memo(Button);```時，卻仍會印出Button Running的狀況。  
 這是因為當function app 重新跑一遍時，會另外製造一個```const toogleParagraphHandler```，儘管看起來功能名稱相同，但對JS是不同的存在．
 類似如下的比較，primitive value(data that is not an object and has no methods or properties)才會對React.memo有用   
-![image](https://user-images.githubusercontent.com/24216536/210253668-df2b5f1d-ff3e-4fce-b85e-0ee45935382f.png)    
 
 
   
@@ -272,7 +264,6 @@ return(
 }
 ```
 在網頁的Console會得到如下的順序，1. Invoke function component-> 2. render-> 3. execute Effect
-<img width="649" alt="image" src="https://user-images.githubusercontent.com/24216536/209051557-0986390a-c9d9-4bdd-942a-cd193295ec1a.png">
 
 
 3. Css 管理 
@@ -422,14 +413,12 @@ export default function App() {
 ```
 Reducer vs State  
 簡單的場景優先使用State, 較多複合條件則選擇使用Reducer來降低程式碼的複雜度。 
-![image](https://user-images.githubusercontent.com/24216536/209511537-2a79a6cd-4b6d-4fa3-97fd-18026e95b82e.png)  
 
 8. useContext.  
 當需要使用的State於越來越多層之間傳遞時，就會更難以管理他們，因為很Props僅是需要經過中間件的傳遞進到Component中，造成了很多的傳遞管理困難．   
 就可以利用useContext來進行全域的參數傳遞.  
 
 9. Hooks使用注意事項.  
-![image](https://user-images.githubusercontent.com/24216536/209531771-a10e0046-2ad1-4290-97f3-38ddc07572e0.png).  
 
 10. useImperativeHandle.  
 先前有提到若是有focus 在 input 元素之類的需求，可以透過 useRef 的方式達成。  
@@ -476,7 +465,6 @@ import mealsImage from '../../assets/meals.jpg
 ```<input {...props.input}/>```
 
 12. useCallback
-![image](https://user-images.githubusercontent.com/24216536/210258289-4957ac95-dfa1-4c15-835f-78f933074c7d.png)。  
 ```useCallback```的功能就類似將obj2 指向obj1 的這個動作，藉此比較function內容是否有變化，也因此可以不會每次都被重新渲染。  
 useCallback(), 需傳入兩個參數第一個參數為當首次渲染時要執行什麼動作，第二個[]內容則同useEffect一樣，當內容改變時會再次觸發動作。  
 
