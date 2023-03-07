@@ -1,4 +1,4 @@
-# ReactTry
+# ReactNote
 ## 紀錄學習React 遇到的各種筆記
 
 ### 重點觀念名詞
