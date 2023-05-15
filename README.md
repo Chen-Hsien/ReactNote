@@ -562,16 +562,16 @@ catch 作為錯誤回應 (404, 500…).
     const data = await response.json();
     console.log(data);
   }
-15. 
-16. Custom Hooks
+15. Custom Hooks
 Outsource stateful logic into re-usable functions.  
 ucstom hooks can use other React hooks and React state.  
 以usexxxx作為function name.  
 自定義的 Hook 有一個機制重複使用 stateful 邏輯（例如設定訂閱並記住目前的值），但每次你使用自定義的 Hook 時，所有內部的 state 和 effect 都是完全獨立的。  
  
-17. From Control
+16. From Control
 * when form is submitted.  
 * when a input is losing focus(blur).  
 * on every keystroke.  
+
 
 
